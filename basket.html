@@ -6,6 +6,13 @@
     function precise(x) {
       return Number.parseFloat(x).toFixed(2);
     }
+    function changeQuantityMessage() {
+      Materialize.toast("Item quantity changed", 4000);
+    }
+    function removeItemMessage() {
+      Materialize.toast("Item removed", 4000);
+      //Hide div
+    }
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -66,13 +73,13 @@
                   for (var product in productDetails) {
                     if (basket[product] > 0) {
                       document.write('       <tr>\n');
-                      document.write('         <td><img src="img/' + productDetails[product]["image"] + '" /></td>\n');
+                      document.write('         <td><img style="max-height: 200px;" src="img/' + productDetails[product]["image"] + '" /></td>\n');
                       document.write('         <td>' + productDetails[product]["name"] + '</td>\n');
                       document.write('         <td>' + productDetails[product]["units"] + '</td>\n');
                       document.write('         <td>&pound;' + productDetails[product]["price"] + '</td>\n');
                       document.write('         <td><input name="' + product + '" id="' + product + '" type="text" value="' + basket[product] + '" style="width: 30px;margin: 0 0 0 0;" /></td>\n');
-                      document.write('         <td><input class="btn green" input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value)" /></td>\n');
-                      document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0)" /></td>\n');
+                      document.write('         <td><input class="btn green" input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value);changeQuantityMessage();" /></td>\n');
+                      document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0);removeItemMessage();" /></td>\n');
 		      document.write('       </tr>\n');
                     }
                   }
