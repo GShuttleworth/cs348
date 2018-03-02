@@ -115,9 +115,14 @@
       <div class="col s12 m6">
         <h4>Card Details</h4>
 
-        <div class="input-field col s12">
-         <input type="text" name="cardnumber" id="cardnumber" value="" class="validate" required/>
+        <div class="input-field col s8">
+         <input type="number" name="cardnumber" id="cardnumber" value="" class="validate" required/>
          <label for="cardnumber">Card Number</label>
+       </div>
+
+       <div class="input-field col s4">
+         <input type="number" name="cvc" id="cvc" value="" class="validate" required/>
+         <label for="cvc">CVC</label>
        </div>
 
        <div class="input-field col s6">
@@ -129,7 +134,7 @@
 
        <div class="input-field col s6">
          <input type="text" name="year" id="year" value="" class="validate" required/>
-         <label for="month"> ExpiryYear</label>
+         <label for="month"> Expiry Year</label>
        </div>  
      </div>
 
