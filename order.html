@@ -25,7 +25,7 @@
 
       <!-- Mobile Nav -->
       <ul id="nav-mobile" class="side-nav">
-  <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
+        <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
         <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
         <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
       </ul>
@@ -39,86 +39,135 @@
   <main>
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
-        <h2 class="header">Order</h1>
+        <h2 class="header">Order</h2>
       </div>
     </div>
 
 
     <div class="container">
       <div class="row">
+        <form onsubmit="setName();setAddress();setCardDetails();window.open('invoice.html');self.close();">
+          <div class="row">
+            <h4>Personal Details</h4>
 
-        <form>
-      <table class="bordered highlight" width="100%">
-        <col style="width:10%">
-        <col style="width:10%">
-        <col style="width:10%">
-        <col style="width:30%">
-        <col style="width:10%">
-        <col style="width:30%">
-       <tr>
-         <td>Title: </td><td><input type="text" name="title" id="title" value="" style="width: 20px;" /></td>
-         <td>First Name: </td><td><input type="text" name="firstname" id="firstname" value="" style="width: 120px;" /></td>
-         <td>Surname: </td><td><input type="text" name="surname" id="surname" value="" style="width: 120px;" /></td>
-       </tr>
-       <tr>
-         <td>Number: </td><td><input type="text" name="number" id="number" value="" style="width: 30px;" /></td>
-         <td>Street: </td><td><input type="text" name="street" id="street" value="" style="width: 120px;" /></td>
-       </tr>
-       <tr>
-         <td>Postcode: </td><td><input type="text" name="postcode" id="postcode" value="" style="width: 40px;" /></td>
-         <td>City: </td><td><input type="text" name="city" id="city" value="" style="width: 120px;" /></td>
-         <td>Country: </td><td><input type="text" name="country" id="country" value="" style="width: 120px;" /></td>
-       </tr>
-       <tr>
-         <td>Card Type: </td><td><div style="display: inline-block;">
-          <p><input class="with-gap" name="cardtype" type ="radio" id="solo" value="Solo" /><label for="solo">Solo</label></p>
-          <p><input class="with-gap" name="cardtype" type ="radio" id="switch" value="Switch" /><label for="switch">Switch</label></p>
-          <p><input class="with-gap" name="cardtype" type ="radio" id="mastercard" value="Mastercard" /><label for="mastercard">Mastercard</label></p>
-          <p><input class="with-gap" name="cardtype" type ="radio" id="visa" value="Visa" /><label for="visa">Visa</label></p></td>
-         <td>Card Number: </td><td><input type="text" name="cardnumber" id="cardnumber" value="" style="width: 120px;" />
-         <td>Expiry Date: </td><td><input type="text" name="month" id="month" value="" style="width: 20px;" /> <input type="text" name="year" id="year" value="" style="width: 20px;" /></td>
-       </tr>
-       <col style="width:100%">
-     </table>
-     <table>
-       <tr>
-         <td style="text-align: center;">
-           <input type="button" class="btn green" name="cancel" value="Cancel" onclick="window.open('basket.html');self.close();" />
-           <input type="button" class="btn green" name="proceed" value="Proceed" onclick="setName();setAddress();setCardDetails();window.open('invoice.html');self.close();"/>
-         </td>
-       </tr>
-      </table>
-    </form>
+            <div class="input-field col s4 m2">
+             <input type="text" name="title" id="title" class="validate" value="" required/>
+             <label for="title">Title</label>
+           </div>
 
+           <div class="input-field col s8 m5">
+             <input type="text" name="firstname" id="firstname" class="validate" value="" required/>
+             <label for="firstname">First Name</label>
+           </div>
+
+           <div class="input-field col s12 m5">
+             <input type="text" name="surname" id="surname" class="validate" value="" required/>
+             <label for="surname">Surname</label>
+           </div>
+         </div>
+
+         <div class="row">
+          <h5>Address</h5>
+          <div class="row">
+
+            <div class="input-field col s4 m5">
+             <input type="text" name="number" id="number" value="" class="validate" required/>
+             <label for="number">House Number</label>
+           </div>
+
+           <div class="input-field col s8 m7">
+             <input type="text" name="street" id="street" value="" class="validate" required/>
+             <label for="street">Street</label>
+           </div>
+         </div>
+
+         <div class="row">
+          <div class="input-field col s8 m7">
+           <input type="text" name="city" id="city" value="" class="validate" required/>
+           <label for="city">City</label>
+         </div>
+
+         <div class="input-field col s4 m5">
+           <input type="text" name="postcode" id="postcode" value="" class="validate" required/>
+           <label for="postcode">Postcode</label>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="input-field col s6 m12">
+           <input type="text" name="country" id="country" value="" class="validate" required/>
+           <label for="country">Country</label>
+         </div>
+       </div>
+     </div>
+
+     <div class="row">
+      <h4>Payment Details</h4>
+      <div class="col s12 m6">
+        <h4>Card Type</h4>
+
+        <p><input class="with-gap" name="cardtype" type ="radio" id="solo" value="Solo" required/><label for="solo">Solo</label></p>
+        <p><input class="with-gap" name="cardtype" type ="radio" id="switch" value="Switch" required/><label for="switch">Switch</label></p>
+        <p><input class="with-gap" name="cardtype" type ="radio" id="mastercard" value="Mastercard" required/><label for="mastercard">Mastercard</label></p>
+        <p><input class="with-gap" name="cardtype" type ="radio" id="visa" value="Visa" required/><label for="visa">Visa</label></p>
 
       </div>
-      <div class="row right-align">
+      <div class="col s12 m6">
+        <h4>Card Details</h4>
 
-        <form>
-          <input type="button" class="btn green darken-4" name="exit" value="Exit" onclick="window.close()" />
-          <input type="button" class="btn green" value="View Basket" onclick="window.open('basket.html')" />
-        </form>
-        <br />
-      </div>
+        <div class="input-field col s12">
+         <input type="text" name="cardnumber" id="cardnumber" value="" class="validate" required/>
+         <label for="cardnumber">Card Number</label>
+       </div>
+
+       <div class="input-field col s6">
+         <input type="text" name="month" id="month" value="" class="validate" required/>
+         <label for="month">Expiry Month</label>
+
+
+       </div>
+
+       <div class="input-field col s6">
+         <input type="text" name="year" id="year" value="" class="validate" required/>
+         <label for="month"> ExpiryYear</label>
+       </div>  
+     </div>
+
+     <div class="row right-align">
+   <input type="button" class="btn green darken-4" name="cancel" value="Cancel" onclick="window.open('basket.html');self.close();" />
+     <input type="submit" class="btn green" name="proceed" value="Proceed" />
+</div>
+
+     
+   </div>
+ </form>
+
+
+ <!-- <div class="row right-align">
+  <form>
+    <input type="button" class="btn green darken-4" name="exit" value="Exit" onclick="window.close()" />
+    <input type="button" class="btn green" value="View Basket" onclick="window.open('basket.html')" />
+  </form>
+</div>
+</div> -->
+
+</main>
+<!-- end Main Page Content -->
+
+<!-- Footer copyright -->
+<footer class="page-footer green darken-3">
+  <div class="footer-copyright">
+    <div class="container right-align">
+      Copyright &copy; 2014 InterVeg Coventry Ltd.
     </div>
-    
-  </main>
-  <!-- end Main Page Content -->
+  </div>
+</footer>
+<!-- end Footer copyright -->
 
-  <!-- Footer copyright -->
-  <footer class="page-footer green darken-3">
-    <div class="footer-copyright">
-      <div class="container right-align">
-        Copyright &copy; 2014 InterVeg Coventry Ltd.
-      </div>
-    </div>
-  </footer>
-  <!-- end Footer copyright -->
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
 
 </body>
 </html>
