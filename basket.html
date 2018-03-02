@@ -21,6 +21,10 @@
       $('#totals').html("<p>Total ex VAT: £" + precise(totals["totalnovat"]) + "<br />includes VAT: £" + precise(totals["vat"]) + "<br /><b>Total inc. VAT: £" + precise(totals["total"]) + "</b></p>");
 
     }
+    function checkConfirm() {
+	  $('#modal1').modal('open');
+    }
+       
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -53,7 +57,17 @@
   </nav>
 
   <!-- End Navigation -->
-
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Confirmation</h4>
+      <p>Are you sure you want to clear the basket. Note: This action is irreversible.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">No</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="javascript:createEmptyBasket();window.open('basket.html');self.close();">Yes</a>
+    </div>
+  </div>
   <main>
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
@@ -106,7 +120,7 @@
             </div>
             <form>
               <input type="button" class="btn green" name="continue" value="Continue Shopping" onclick="window.open('shop.html');self.close();" />
-              <input type="button" class="btn green" name="clearbasket" value="Clear Basket" onclick="javascript:createEmptyBasket();window.open('basket.html');self.close();" />
+              <input type="button" class="btn green" name="clearbasket" value="Clear Basket" onclick="checkConfirm();" /> <!-- onclick="javascript:createEmptyBasket();window.open('basket.html');self.close();" -->
               <input type="button" class="btn green" name="order" value="Order" onclick="window.open('order.html');self.close();" />
             </form>
             <br />
@@ -128,5 +142,20 @@
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="js/materialize.js"></script>
       <script src="js/init.js"></script>
+      <script>
+	$(document).ready(function(){
+    		  $('.modal').modal({
+      			dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      			opacity: .5, // Opacity of modal background
+      			inDuration: 300, // Transition in duration
+      			outDuration: 200, // Transition out duration
+      			startingTop: '4%', // Starting top style attribute
+      			endingTop: '10%', // Ending top style attribute
+      			ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+      			},
+      			complete: function() {  } // Callback for Modal close
+    		});
+	});
+      </script>
     </body>
     </html>
