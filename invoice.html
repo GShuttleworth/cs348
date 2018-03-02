@@ -1,49 +1,120 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" style="height: 100%;">
-  <head>
-    <title>eVeg - Invoice</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	
-    <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	
-    <script type="text/javascript" src="model.js"></script>
-  </head>
-  <body style="height: 100%; font-family: monospace;">
-    <script>
-      document.write('    <textarea style="width: 100%; height: 100%;">\n');
-      document.write('                                  INVOICE\n\n\n');
-      clientName = getName();
-      document.write('       for ' + clientName['title'] + ' ' + clientName['firstname'] + ' ' + clientName['surname'] + '\n');
-      address = getAddress();
-      document.write('       ' + address['number'] + ' ' + address['street'] + '\n');
-      document.write('       ' + address['city'] + ' ' + address['postcode'] + '\n');
-      document.write('       ' + address['country'] + '\n\n\n');
-      document.write('      ------------------------------------------------------------------------------\n');
-      basket = readBasket();
-      productDetails = getProductDetails();
+<html lang="en">
+<head>
+  <script type="text/javascript" src="model.js"></script>
 
-      for (var product in basket) {
-        if (basket[product] > 0) {
-          document.write('       ' + productDetails[product]["name"] + '   ' +
-			getProductQuantity(product) + ' @ ' +
-			productDetails[product]["units"] + '\n');
-          document.write('                                       &pound;' + productDetails[product]["price"] + '\n');
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>eVeg - Invoice</title>
+
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script type="text/javascript" src="model.js"></script>
+
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="green" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="eveg.html" target="_blank" class="brand-logo">eVeg</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
+        <li><a href="#" onclick="window.open('shop.html');self.close()" style="background-color: green;">Shop</a></li>
+        <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
+      </ul>
+
+      <!-- Mobile Nav -->
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
+        <li><a href="#" onclick="window.open('shop.html');self.close()" style="background-color: lightgrey;">Shop</a></li>
+        <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <!-- End Navigation -->
+
+  <!-- Main Page Content -->
+  <main>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <h3 class="header">Thank You For Shopping</h3>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card-panel" id="printed-invoice">
+        <h4>Invoice</h4>
+        <script>
+          clientName = getName();
+          document.write('       for ' + clientName['title'] + ' ' + clientName['firstname'] + ' ' + clientName['surname'] + '<br />');
+          address = getAddress();
+          document.write('       ' + address['number'] + ' ' + address['street'] + '<br />');
+          document.write('       ' + address['city'] + ' ' + address['postcode'] + '<br />');
+          document.write('       ' + address['country'] + '<br />');
+          document.write('      ------------------------------------------------------------------------------<br />');
+          basket = readBasket();
+          productDetails = getProductDetails();
+
+          for (var product in basket) {
+            if (basket[product] > 0) {
+              document.write('       ' + productDetails[product]["name"] + '   ' +
+                getProductQuantity(product) + ' @ ' +
+                productDetails[product]["units"] + '<br />');
+              document.write('                                       &pound;' + productDetails[product]["price"] + '<br />');
+            }
+          }
+          document.write('      ------------------------------------------------------------------------------<br />');
+          document.write('       TOTAL<br />');
+          var totals = calculateTotals();
+          document.write('         ' + totals["total"] + ' inc. VAT<br />');
+          document.write('         ' + totals["totalnovat"] + ' ex. VAT<br />');
+          document.write('         ' + totals["vat"] + ' VAT paid<br />');
+
+          var cardDetails = getCardDetails();
+          document.write('         Paid by ' + cardDetails['cardtype'] + ' **** **** ****' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)<br />');
+          document.write('      ------------------------------------------------------------------------------<br />');
+        </script>
+      </div>
+
+      <script language="javascript">
+        function printdiv(printpage)
+        {
+          var headstr = "<html><head><title>eVeg Invoice</title></head><body>";
+          var footstr = "</body>";
+          var newstr = document.all.item(printpage).innerHTML;
+          var oldstr = document.body.innerHTML;
+          document.body.innerHTML = headstr+newstr+footstr;
+          window.print();
+          document.body.innerHTML = oldstr;
+          return false;
         }
-      }
-      document.write('      ------------------------------------------------------------------------------\n');
-      document.write('       TOTAL\n');
-      var totals = calculateTotals();
-      document.write('         ' + totals["total"] + ' inc. VAT\n');
-      document.write('         ' + totals["totalnovat"] + ' ex. VAT\n');
-      document.write('         ' + totals["vat"] + ' VAT paid\n\n');
+      </script>
+      <div class="btn green right" onclick="printdiv('printed-invoice');">Print Invoice</div>
 
-      var cardDetails = getCardDetails();
-      document.write('         Paid by ' + cardDetails['cardtype'] + ' **** **** ****' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)\n');
-      document.write('      ------------------------------------------------------------------------------\n');
-      document.write('    </textarea>\n');
-    </script>
-  </body>
+    </div>
+  </div>    
+</main>
+<!-- end Main Page Content -->
+
+<!-- Footer copyright -->
+<footer class="page-footer green darken-3">
+  <div class="footer-copyright">
+    <div class="container right-align">
+      Copyright &copy; 2014 InterVeg Coventry Ltd.
+    </div>
+  </div>
+</footer>
+<!-- end Footer copyright -->
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+
+</body>
 </html>

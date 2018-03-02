@@ -14,3 +14,25 @@
   main {
     flex: 1 0 auto;
   }
+
+
+/*  @media print {
+    .printed-invoice {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    nav {
+    	display: none;
+    	text: 59pt;
+    }*/
+
+    @media print { body * { display:none; } .printed-invoice { display:block; background-color: white; height: 100%; width: 100%; position: fixed; top: 0; left: 0; margin: 0; padding: 15px; font-size: 14px; line-height: 18px; } } 
+}
