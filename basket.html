@@ -9,9 +9,11 @@
     function changeQuantityMessage() {
       Materialize.toast("Item quantity changed", 4000);
     }
-    function removeItemMessage() {
-      Materialize.toast("Item removed", 4000);
-      //Hide div
+    function removeItemMessage(item) {
+      Materialize.toast(item + " removed", 4000);
+      //Hide row
+      $('#'+item).fadeOut(300, function(){ $(this).remove();});
+      //$('#'+item).remove();
     }
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -72,14 +74,14 @@
                   var productDetails = getProductDetails();
                   for (var product in productDetails) {
                     if (basket[product] > 0) {
-                      document.write('       <tr>\n');
+                      document.write('       <tr id=' +  productDetails[product]["name"] + '>\n');
                       document.write('         <td><img style="max-height: 200px;" src="img/' + productDetails[product]["image"] + '" /></td>\n');
                       document.write('         <td>' + productDetails[product]["name"] + '</td>\n');
                       document.write('         <td>' + productDetails[product]["units"] + '</td>\n');
                       document.write('         <td>&pound;' + productDetails[product]["price"] + '</td>\n');
                       document.write('         <td><input name="' + product + '" id="' + product + '" type="text" value="' + basket[product] + '" style="width: 30px;margin: 0 0 0 0;" /></td>\n');
                       document.write('         <td><input class="btn green" input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value);changeQuantityMessage();" /></td>\n');
-                      document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0);removeItemMessage();" /></td>\n');
+                      document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0);removeItemMessage(\'' + productDetails[product]["name"] + '\');" /></td>\n');
 		      document.write('       </tr>\n');
                     }
                   }

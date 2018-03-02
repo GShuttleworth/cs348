@@ -6,6 +6,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>eVeg - Shop</title>
+  <script type="text/javascript">
+    function addItemMessage(item) {
+      Materialize.toast(item + " added", 4000);
+    }
+  </script>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -58,7 +63,7 @@
           document.write('<div class="card-content"><span class="card-title">' + productDetails[product]["name"] + '</span>');
           document.write('<p>' + productDetails[product]["description"] + '</p></br><p><b>£' + productDetails[product]["price"] + '</b> per ' + productDetails[product]["units"] + '</p></div>');
           document.write('<div class="card-action"><div style="max-width:200px;height:50px;margin: 0 auto"><div class="input-field"><input name="' + product + '" id="' + product + '" type="text" class="validate" style="float:left; display:inline; width: 40%;" /><label for="' + product +'">Quantity</label></div>');
-          document.write('<input style="float:right;display:inline;" class="btn green" name="add' + product + '" type="button" value="Add" onclick="javascript:addToBasket(\'' + product + '\', document.getElementById(\'' + product + '\').value)" /></div></div></div></div>');
+          document.write('<input style="float:right;display:inline;" class="btn green" name="add' + product + '" type="button" value="Add" onclick="javascript:addToBasket(\'' + product + '\', document.getElementById(\'' + product + '\').value);addItemMessage(\'' + productDetails[product]["name"] + '\');" /></div></div></div></div>');
           if(index%3 == 2){
             document.write('</div>');
           }
