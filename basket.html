@@ -99,7 +99,7 @@
                       document.write('         <td>' + productDetails[product]["name"] + '</td>\n');
                       document.write('         <td>' + productDetails[product]["units"] + '</td>\n');
                       document.write('         <td>&pound;' + productDetails[product]["price"] + '</td>\n');
-                      document.write('         <td><input name="' + product + '" id="' + product + '" type="text" value="' + basket[product] + '" style="width: 30px;margin: 0 0 0 0;" /></td>\n');
+                      document.write('         <td><input name="' + product + '" id="' + product + '" type="number" min="0" default="' + basket[product] + '" value="' + basket[product] + '" style="width: 30px;margin: 0 0 0 0;" /></td>\n');
                       document.write('         <td><input class="btn green" input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value);changeQuantityMessage(\'' + productDetails[product]["name"] + '\');" /></td>\n');
                       document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0);removeItemMessage(\'' + productDetails[product]["name"] + '\');" /></td>\n');
 		      document.write('       </tr>\n');
