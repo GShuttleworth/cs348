@@ -1,8 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" style="height: 100%;">
   <head>
-    <title></title>
+    <title>eVeg - Invoice</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	
     <script type="text/javascript" src="model.js"></script>
   </head>
   <body style="height: 100%; font-family: monospace;">
@@ -21,7 +27,9 @@
 
       for (var product in basket) {
         if (basket[product] > 0) {
-          document.write('       ' + productDetails[product]["name"] + '   ' + productDetails[product]["units"] + '\n');
+          document.write('       ' + productDetails[product]["name"] + '   ' +
+			getProductQuantity(product) + ' @ ' +
+			productDetails[product]["units"] + '\n');
           document.write('                                       &pound;' + productDetails[product]["price"] + '\n');
         }
       }
@@ -29,11 +37,11 @@
       document.write('       TOTAL\n');
       var totals = calculateTotals();
       document.write('         ' + totals["total"] + ' inc. VAT\n');
-      document.write('         ' + totals["vat"] + ' ex. VAT\n');
-      document.write('         ' + totals["totalnovat"] + ' VAT paid\n\n');
+      document.write('         ' + totals["totalnovat"] + ' ex. VAT\n');
+      document.write('         ' + totals["vat"] + ' VAT paid\n\n');
 
-      cardDetails = getCardDetails();
-      document.write('         Paid by ' + cardDetails['cardtype'] + ' ' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)\n');
+      var cardDetails = getCardDetails();
+      document.write('         Paid by ' + cardDetails['cardtype'] + ' **** **** ****' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)\n');
       document.write('      ------------------------------------------------------------------------------\n');
       document.write('    </textarea>\n');
     </script>
