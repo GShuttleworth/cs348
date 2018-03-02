@@ -105,6 +105,7 @@ function calculateTotals() {
 }
 
 function addToBasket(product, quantity) {
+    Materialize.toast('Added to basket', 4000) // 4000 is the duration of the toast
   if (document.cookie.indexOf(product) == -1) {
     createEmptyBasket();
   }
