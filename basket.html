@@ -6,14 +6,20 @@
     function precise(x) {
       return Number.parseFloat(x).toFixed(2);
     }
-    function changeQuantityMessage() {
-      Materialize.toast("Item quantity changed", 4000);
+    function changeQuantityMessage(item) {
+      Materialize.toast(item + " quantity changed", 4000);
+      updateTotals();
     }
     function removeItemMessage(item) {
       Materialize.toast(item + " removed", 4000);
       //Hide row
       $('#'+item).fadeOut(300, function(){ $(this).remove();});
-      //$('#'+item).remove();
+      updateTotals();
+    }
+    function updateTotals() {
+      var totals = calculateTotals();
+      $('#totals').html("<p>Total ex VAT: £" + precise(totals["totalnovat"]) + "<br />includes VAT: £" + precise(totals["vat"]) + "<br /><b>Total inc. VAT: £" + precise(totals["total"]) + "</b></p>");
+
     }
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -80,7 +86,7 @@
                       document.write('         <td>' + productDetails[product]["units"] + '</td>\n');
                       document.write('         <td>&pound;' + productDetails[product]["price"] + '</td>\n');
                       document.write('         <td><input name="' + product + '" id="' + product + '" type="text" value="' + basket[product] + '" style="width: 30px;margin: 0 0 0 0;" /></td>\n');
-                      document.write('         <td><input class="btn green" input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value);changeQuantityMessage();" /></td>\n');
+                      document.write('         <td><input class="btn green" input name="change' + product + '" type="button" value="change quantity" onclick="javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value);changeQuantityMessage(\'' + productDetails[product]["name"] + '\');" /></td>\n');
                       document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0);removeItemMessage(\'' + productDetails[product]["name"] + '\');" /></td>\n');
 		      document.write('       </tr>\n');
                     }
@@ -92,10 +98,12 @@
         </div>
         <!--  <div style="position: fixed; bottom: 0; left: 0; right: 0; height: 100px;"> -->
           <div class="row right-align">
-            <script>
+            <div id="totals">
+	    <script>
               var totals = calculateTotals();
               document.write('<p>Total ex VAT: £' + precise(totals["totalnovat"]) + '<br />includes VAT: £' + precise(totals["vat"]) + '<br /><b>Total inc. VAT: £' + precise(totals["total"]) + '</b></p>\n');
             </script>
+            </div>
             <form>
               <input type="button" class="btn green" name="continue" value="Continue Shopping" onclick="window.open('shop.html');self.close();" />
               <input type="button" class="btn green" name="clearbasket" value="Clear Basket" onclick="javascript:createEmptyBasket();window.open('basket.html');self.close();" />
