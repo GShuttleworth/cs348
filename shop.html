@@ -54,28 +54,21 @@
     </div>
 
     <div class="container">
-    
+    <div class="row">
     
       <script>
         var productDetails = getProductDetails();
-        var index = 0;
         for (var product in productDetails) {
-          if(index%3 == 0){
-            document.write('<div class="row">');
-          }
-          document.write('<div class="col s12 m4"><div class="card"><div class="card-image">');
+          
+          document.write('<div class="col s12 m6 l4 "><div class="card"><div class="card-image">');
           document.write('<img src="img/' + productDetails[product]["image"] + '" /></div>');
           document.write('<div class="card-content"><span class="card-title">' + productDetails[product]["name"] + '</span>');
           document.write('<p>' + productDetails[product]["description"] + '</p></br><p><b>£' + productDetails[product]["price"] + '</b> per ' + productDetails[product]["units"] + '</p></div>');
           document.write('<div class="card-action"><div style="max-width:200px;height:50px;margin: 0 auto"><form onSubmit="addItemMessage(\'' + productDetails[product]["name"] + '\', document.getElementById(\'' + product + '\').value, \'' + product + '\');"><div class="input-field"><input name="' + product + '" id="' + product + '" type="number" min="0" default="0" style="float:left; display:inline; width: 40%;" required/><label for="' + product +'">Quantity</label></div>');
           document.write('<input style="float:right;display:inline;" class="btn green" name="add' + product + '" type="submit" value="Add"/></form></div></div></div></div>');
-          if(index%3 == 2){
-            document.write('</div>');
-          }
-          index++;
         }
       </script>
-     
+     </div>
     </div>    
   </main>
   <!-- end Main Page Content -->
