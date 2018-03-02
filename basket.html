@@ -11,11 +11,17 @@
 	removeItemMessage(item);
 	return;
       }
+      total = countItems();
+		document.getElementById('main-count').innerHTML = total;
+        	document.getElementById('mob-count').innerHTML = total;
       Materialize.toast(item + " quantity changed", 4000);
       updateTotals();
     }
     function removeItemMessage(item) {
       Materialize.toast(item + " removed", 4000);
+      total = countItems();
+		document.getElementById('main-count').innerHTML = total;
+        	document.getElementById('mob-count').innerHTML = total;
       //Hide row
       $('#'+item).fadeOut(300, function(){ $(this).remove();});
       updateTotals();
@@ -28,7 +34,16 @@
     function checkConfirm() {
 	  $('#modal1').modal('open');
     }
-       
+    function countItems() {
+	var basket = readBasket();
+	total = 0;
+  	for (var product in basket) {
+		if (parseInt(basket[product]) > 0) {
+			total += 1;
+		}
+  	}
+	return total;	
+   }       
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -47,14 +62,14 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
         <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
-        <li><a href="#" onclick="window.open('basket.html');self.close()" style="background-color: green;">Basket</a></li>
+        <li><a href="#" onclick="window.open('basket.html');self.close()" style="background-color: green;">Basket<span id="main-count" class="new badge green darken-4" data-badge-caption="items"></span></a></li>
       </ul>
 
       <!-- Mobile Nav -->
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
         <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
-        <li><a href="#" onclick="window.open('basket.html');self.close()" style="background-color: lightgrey;">Basket</a></li>
+        <li><a href="#" onclick="window.open('basket.html');self.close()" style="background-color: lightgrey;">Basket<span id="mob-count" class="new badge green darken-4" data-badge-caption="items"></span></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -159,6 +174,9 @@
       			},
       			complete: function() {  } // Callback for Modal close
     		});
+		var total = countItems();
+        document.getElementById('main-count').innerHTML = total;
+        document.getElementById('mob-count').innerHTML = total;
 	});
       </script>
     </body>

@@ -11,6 +11,18 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script type="text/javascript">
+   function countItems() {
+	var basket = readBasket();
+	total = 0;
+  	for (var product in basket) {
+		if (parseInt(basket[product]) > 0) {
+			total += 1;
+		}
+  	}
+	return total;	
+   }
+  </script>
 </head>
 <body onload="createEmptyBasket();">
 
@@ -20,14 +32,14 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="#" onclick="window.open('eveg.html');self.close()" style="background-color: green;">Home</a></li>
         <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
-        <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
+        <li><a href="#" onclick="window.open('basket.html');self.close()">Basket<span id="main-count" class="new badge green darken-4" data-badge-caption="items"></span></a></li>
       </ul>
 
       <!-- Mobile Nav -->
       <ul id="nav-mobile" class="side-nav">
 	<li><a href="#" onclick="window.open('eveg.html');self.close()" style="background-color: lightgrey;">Home</a></li>
         <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
-        <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
+        <li><a href="#" onclick="window.open('basket.html');self.close()">Basket<span id="mob-count" class="new badge green darken-4" data-badge-caption="items"></span></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -100,6 +112,12 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
-
+<script type="text/javascript">
+$( document ).ready(function() {
+	var total = countItems();
+        document.getElementById('main-count').innerHTML = total;
+        document.getElementById('mob-count').innerHTML = total;
+   });
+</script>
 </body>
 </html>
