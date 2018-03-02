@@ -13,7 +13,11 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript" src="model.js"></script>
-
+  <script type="text/javascript">
+    function precise(x) {
+      return Number.parseFloat(x).toFixed(2);
+    }
+  </script>
 </head>
 <body>
 
@@ -71,9 +75,9 @@
           document.write('      ------------------------------------------------------------------------------<br />');
           document.write('       TOTAL<br />');
           var totals = calculateTotals();
-          document.write('         ' + totals["total"] + ' inc. VAT<br />');
-          document.write('         ' + totals["totalnovat"] + ' ex. VAT<br />');
-          document.write('         ' + totals["vat"] + ' VAT paid<br />');
+	  document.write('       Total ex VAT: £' + precise(totals["totalnovat"]) + '<br />');
+	  document.write('       includes VAT: £' + precise(totals["vat"]) + '<br />');
+	  document.write('       <b>Total inc. VAT: £' + precise(totals["total"]) + '</b><br />');
 
           var cardDetails = getCardDetails();
           document.write('         Paid by ' + cardDetails['cardtype'] + ' **** **** ****' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)<br />');
