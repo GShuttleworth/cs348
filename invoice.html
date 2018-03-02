@@ -13,7 +13,11 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript" src="model.js"></script>
-
+  <script type="text/javascript">
+    function precise(x) {
+      return Number.parseFloat(x).toFixed(2);
+    }
+  </script>
 </head>
 <body>
 
@@ -22,14 +26,14 @@
     <div class="nav-wrapper container"><a id="logo-container" href="eveg.html" target="_blank" class="brand-logo">eVeg</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
-        <li><a href="#" onclick="window.open('shop.html');self.close()" style="background-color: green;">Shop</a></li>
+        <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
         <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
       </ul>
 
       <!-- Mobile Nav -->
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#" onclick="window.open('eveg.html');self.close()">Home</a></li>
-        <li><a href="#" onclick="window.open('shop.html');self.close()" style="background-color: lightgrey;">Shop</a></li>
+        <li><a href="#" onclick="window.open('shop.html');self.close()">Shop</a></li>
         <li><a href="#" onclick="window.open('basket.html');self.close()">Basket</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -71,9 +75,9 @@
           document.write('      ------------------------------------------------------------------------------<br />');
           document.write('       TOTAL<br />');
           var totals = calculateTotals();
-          document.write('         ' + totals["total"] + ' inc. VAT<br />');
-          document.write('         ' + totals["totalnovat"] + ' ex. VAT<br />');
-          document.write('         ' + totals["vat"] + ' VAT paid<br />');
+	  document.write('       Total ex VAT: £' + precise(totals["totalnovat"]) + '<br />');
+	  document.write('       includes VAT: £' + precise(totals["vat"]) + '<br />');
+	  document.write('       <b>Total inc. VAT: £' + precise(totals["total"]) + '</b><br />');
 
           var cardDetails = getCardDetails();
           document.write('         Paid by ' + cardDetails['cardtype'] + ' **** **** ****' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)<br />');
