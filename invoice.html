@@ -75,9 +75,9 @@
           document.write('      ------------------------------------------------------------------------------<br />');
           document.write('       TOTAL<br />');
           var totals = calculateTotals();
-	  document.write('       Total ex VAT: £' + precise(totals["totalnovat"]) + '<br />');
-	  document.write('       includes VAT: £' + precise(totals["vat"]) + '<br />');
-	  document.write('       <b>Total inc. VAT: £' + precise(totals["total"]) + '</b><br />');
+	  document.write('       Total ex VAT: &pound;' + precise(totals["totalnovat"]) + '<br />');
+	  document.write('       includes VAT: &pound;' + precise(totals["vat"]) + '<br />');
+	  document.write('       <b>Total inc. VAT: &pound;' + precise(totals["total"]) + '</b><br />');
 
           var cardDetails = getCardDetails();
           document.write('         Paid by ' + cardDetails['cardtype'] + ' **** **** ****' + cardDetails['cardnumber'].substr(-4) + ' (only last four digits given)<br />');

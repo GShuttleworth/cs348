@@ -28,7 +28,7 @@
     }
     function updateTotals() {
       var totals = calculateTotals();
-      $('#totals').html("<p>Total ex VAT: £" + precise(totals["totalnovat"]) + "<br />includes VAT: £" + precise(totals["vat"]) + "<br /><b>Total inc. VAT: £" + precise(totals["total"]) + "</b></p>");
+      $('#totals').html("<p>Total ex VAT: &pound;" + precise(totals["totalnovat"]) + "<br />includes VAT: &pound;" + precise(totals["vat"]) + "<br /><b>Total inc. VAT: &pound;" + precise(totals["total"]) + "</b></p>");
 
     }
     function checkConfirm() {
@@ -134,7 +134,7 @@
             <div id="totals">
 	    <script>
               var totals = calculateTotals();
-              document.write('<p>Total ex VAT: £' + precise(totals["totalnovat"]) + '<br />includes VAT: £' + precise(totals["vat"]) + '<br /><b>Total inc. VAT: £' + precise(totals["total"]) + '</b></p>\n');
+              document.write('<p>Total ex VAT: &pound;' + precise(totals["totalnovat"]) + '<br />includes VAT: &pound;' + precise(totals["vat"]) + '<br /><b>Total inc. VAT: &pound;' + precise(totals["total"]) + '</b></p>\n');
             </script>
             </div>
             <form>
