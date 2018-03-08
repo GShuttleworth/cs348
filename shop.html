@@ -86,7 +86,7 @@
 	  document.write('<p>' + productDetails[product]["description"] + '</p></br><p><b>&pound;' + productDetails[product]["price"] + '</b> per ' + productDetails[product]["units"] + '</p></div>');
           document.write('<div class="card-action"><div style="max-width:200px;height:50px;margin: 0 auto">');
 	  document.write('<form id="add-\'' + product + '\'" onsubmit="return addItemMessage(\'' + productDetails[product]["name"] + '\', document.getElementById(\'' + product + '\').value, \'' + product + '\')">');
-	  document.write('<div class="input-field"><input name="' + product + '" id="' + product + '" type="number" min="0" default="0" style="float:left; display:inline; width: 40%;" required/><label for="' + product +'">Quantity</label></div>');
+	  document.write('<div class="input-field"><input name="' + product + '" id="' + product + '" type="number" min="1" default="1" step="1" style="float:left; display:inline; width: 40%;" required/><label for="' + product +'">Quantity</label></div>');
           document.write('<input style="float:right;display:inline;" class="btn green" name="add' + product + '" type="submit" value="Add"/></form></div></div></div></div>');
 	  if(index%3 == 2){
             document.write('</div>');
