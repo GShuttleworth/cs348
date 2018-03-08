@@ -25,7 +25,6 @@
   </script>
 </head>
 <body onload="createEmptyBasket();">
-<div class="navbar-fixed">
   <!-- Navigation -->
   <nav class="green" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="eveg.html" target="_blank" class="brand-logo">eVeg</a>
@@ -44,7 +43,6 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-</div>
   <!-- End Navigation -->
 
   <!-- Main Page Content -->
@@ -114,6 +112,7 @@
 <script src="js/init.js"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
+	$(".button-collapse").sideNav();
 	var total = countItems();
         document.getElementById('main-count').innerHTML = total;
         document.getElementById('mob-count').innerHTML = total;
