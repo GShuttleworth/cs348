@@ -6,16 +6,18 @@
     function precise(x) {
       return Number.parseFloat(x).toFixed(2);
     }
-    function changeQuantityMessage(item, val) {
+    function changeQuantityMessage(item, val, product) {
+      changeProductQuantity(product, val);
       if (val == 0) {
 	removeItemMessage(item);
-	return;
+	return false;
       }
       total = countItems();
 		document.getElementById('main-count').innerHTML = total;
         	document.getElementById('mob-count').innerHTML = total;
       Materialize.toast(item + " quantity changed", 4000);
       updateTotals();
+      return false;
     }
     function removeItemMessage(item) {
       Materialize.toast(item + " removed", 4000);
@@ -95,8 +97,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <form>
-            <table class="bordered highlight">
+            <table class="responsive-table bordered highlight">
               <thead>
                 <th>Image</th>
                 <th>Name</th>
@@ -113,21 +114,21 @@
                   var productDetails = getProductDetails();
                   for (var product in productDetails) {
                     if (basket[product] > 0) {
-                      document.write('       <form onSubmit="return javascript:changeProductQuantity(\'' + product + '\', document.getElementById(\'' + product + '\').value);changeQuantityMessage(\'' + productDetails[product]["name"] + '\', document.getElementById(\'' + product + '\').value);"><tr id=' +  productDetails[product]["name"] + '>\n');
+                      document.write('       <form id="change-\'' + product + '\'" onsubmit="return changeQuantityMessage(\'' + productDetails[product]["name"] + '\', document.getElementById(\'' + product + '\').value, \'' + product + '\')">');
+		      document.write('	       <tr id=' +  productDetails[product]["name"] + '>\n');
                       document.write('         <td><img style="max-height: 200px;" src="img/' + productDetails[product]["image"] + '" /></td>\n');
                       document.write('         <td>' + productDetails[product]["name"] + '</td>\n');
                       document.write('         <td>' + productDetails[product]["units"] + '</td>\n');
                       document.write('         <td>&pound;' + productDetails[product]["price"] + '</td>\n');
                       document.write('         <td><input name="' + product + '" id="' + product + '" type="number" min="1" step="1" default="' + basket[product] + '" value="' + basket[product] + '" style="width: 30px;margin: 0 0 0 0;" /></td>\n');
-                      document.write('         <td><input class="btn green" input name="change' + product + '" type="submit" value="change quantity" onclick="" /></td>\n');
+                      document.write('         <td><input class="btn green" input name="change' + product + '" type="submit" value="change quantity" /></td>\n');
                       document.write('	       <td><input class="btn green" input name="remove' + product + '" type="button" value="remove item" onclick="javascript:changeProductQuantity(\'' + product + '\', 0);removeItemMessage(\'' + productDetails[product]["name"] + '\');" /></td>\n');
-		      document.write('       </tr>\n');
+		      document.write('       </tr></form>\n');
                     }
                   }
                 </script>
               </tbody>
             </table>
-          </form>
         </div>
         <!--  <div style="position: fixed; bottom: 0; left: 0; right: 0; height: 100px;"> -->
           <div class="row right-align">
